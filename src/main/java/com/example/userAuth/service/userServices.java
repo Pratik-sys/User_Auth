@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -15,9 +16,12 @@ public class userServices {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     public users addUsers(users user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);}
+        return userRepo.save(user);
+    }
+
+    public List<users> findByroles (String role){return  userRepo.findByRoles(role);}
+    public  List<users> findAllUsers(){return  userRepo.findAll();}
 
 }
