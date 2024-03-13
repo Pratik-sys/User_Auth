@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +22,8 @@ public class userServices {
         return userRepo.save(user);
     }
 
-    public List<users> findByroles (String role){return  userRepo.findByRoles(role);}
-    public  List<users> findAllUsers(){return  userRepo.findAll();}
+    public List<users> findByRoles (String role){return userRepo.findByRoles(role);}
+    public  List<users> findAllUsers(){return userRepo.findAll();}
+    public Optional<users> findByEmail(String email) {return userRepo.findByEmail(email);}
 
 }
