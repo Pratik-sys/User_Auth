@@ -1,5 +1,5 @@
 package com.example.userAuth.model;
 
-public enum roles {
+public enum Roles {
     ADMIN, STANDARD_USER
 }

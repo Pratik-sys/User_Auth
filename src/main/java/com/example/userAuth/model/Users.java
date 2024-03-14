@@ -15,7 +15,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class users {
+public class Users {
     @Id
     private  String id;
     private  String userName;
@@ -25,6 +25,6 @@ public class users {
     private  String confirmPassword;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Kolkata")
     private Date createdDateTime = new Date();
-    private roles roles;
+    private Roles roles;
 
 }
