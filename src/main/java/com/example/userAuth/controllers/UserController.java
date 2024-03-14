@@ -1,5 +1,6 @@
 package com.example.userAuth.controllers;
 
+import com.example.userAuth.dto.UserDTO;
 import com.example.userAuth.model.Users;
 import com.example.userAuth.service.UserServices;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class UserController {
     @GetMapping("/get-by-roles")
     public  ResponseEntity<List<Users>> getUsersByRoles(@RequestParam("role") String role){return ResponseEntity.ok().body(userServ.findByRoles(role));}
     @GetMapping("/getAll")
-    public ResponseEntity<List<Users>> getAllUsers(){return ResponseEntity.ok().body(userServ.findAllUsers());}
+    public ResponseEntity<List<UserDTO>> getAllUsers(){return ResponseEntity.ok().body(userServ.findAllUsers());}
     @GetMapping("/getByEmail")
     public ResponseEntity<Optional<Users>> getUserByEmail(@RequestParam("email") String email){return ResponseEntity.ok().body(userServ.findByEmail(email));}
 }
