@@ -19,9 +19,9 @@ public class UserController {
     @PostMapping("/add")
     public ResponseEntity<Users> addUsersToDB(@RequestBody Users user){return ResponseEntity.ok().body(userServ.addUsers(user));}
     @GetMapping("/get-by-roles")
-    public  ResponseEntity<List<Users>> getUsersByRoles(@RequestParam("role") String role){return ResponseEntity.ok().body(userServ.findByRoles(role));}
+    public  ResponseEntity<List<UserDTO>> getUsersByRoles(@RequestParam("role") String role){return ResponseEntity.ok().body(userServ.findByRoles(role));}
     @GetMapping("/getAll")
     public ResponseEntity<List<UserDTO>> getAllUsers(){return ResponseEntity.ok().body(userServ.findAllUsers());}
     @GetMapping("/getByEmail")
-    public ResponseEntity<Optional<Users>> getUserByEmail(@RequestParam("email") String email){return ResponseEntity.ok().body(userServ.findByEmail(email));}
+    public ResponseEntity<UserDTO> getUserByEmail(@RequestParam("email") String email){return ResponseEntity.ok().body(userServ.findByEmail(email));}
 }

@@ -4,6 +4,7 @@ import com.example.userAuth.dto.UserDTO;
 import com.example.userAuth.model.Users;
 import com.example.userAuth.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,31 +19,29 @@ public class UserServices {
     private UserRepository userRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    public Users addUsers(Users user){
+
+    public Users addUsers(Users user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
     }
 
-    public List<Users> findByRoles (String role){return userRepo.findByRoles(role);}
-    public  List<UserDTO> findAllUsers(){
-        return userRepo
-                .findAll()
-                .stream()
-                .map(this::convertDataIntoDTO)
-                .collect(Collectors.toList());
+    public List<UserDTO> findByRoles(String role) {
+        List<Users> users = userRepo.findByRoles(role);
+        return users.stream().map((user) -> modelMapper.map(user, UserDTO.class)).collect(Collectors.toList());
     }
 
-    private UserDTO convertDataIntoDTO(Users user) {
-        UserDTO udto = new UserDTO();
-        udto.setId(user.getId());
-        udto.setEmail(user.getEmail());
-        udto.setUserName(user.getUserName());
-        udto.setRoles(user.getRoles());
-        return udto;
+    public List<UserDTO> findAllUsers() {
+        List<Users> users = userRepo.findAll();
+        return users.stream().map((user) -> modelMapper.map(user, UserDTO.class)).collect(Collectors.toList());
     }
 
-    public Optional<Users> findByEmail(String email) {return userRepo.findByEmail(email);}
+    public UserDTO findByEmail(String email) {
+      Users users = userRepo.findByEmail(email);
+        return (modelMapper.map(users, UserDTO.class));
 
+    }
 
 }
