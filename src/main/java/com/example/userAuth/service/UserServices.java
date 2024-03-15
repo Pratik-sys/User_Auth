@@ -43,5 +43,14 @@ public class UserServices {
         return (modelMapper.map(users, UserDTO.class));
 
     }
-
+    public String deleteById(String id){
+        Optional<Users> users = userRepo.findById(id);
+        if (users.isPresent()){
+            userRepo.deleteById(id);
+            return ("User with id :" + id + "is deleted");
+        }
+        else {
+            return ("Something went wrong");
+        }
+    }
 }

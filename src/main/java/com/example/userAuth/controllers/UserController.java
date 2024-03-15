@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -24,4 +23,6 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> getAllUsers(){return ResponseEntity.ok().body(userServ.findAllUsers());}
     @GetMapping("/getByEmail")
     public ResponseEntity<UserDTO> getUserByEmail(@RequestParam("email") String email){return ResponseEntity.ok().body(userServ.findByEmail(email));}
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<String> deleteUserById(@PathVariable("id") String id){return  ResponseEntity.ok().body(userServ.deleteById(id));}
 }
