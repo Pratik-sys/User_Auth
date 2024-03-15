@@ -1,5 +1,6 @@
 package com.example.userAuth.service;
 
+import com.example.userAuth.dto.AddUserDTO;
 import com.example.userAuth.dto.UserDTO;
 import com.example.userAuth.model.Users;
 import com.example.userAuth.repository.UserRepository;
@@ -23,9 +24,11 @@ public class UserServices {
     private ModelMapper modelMapper;
 
 
-    public Users addUsers(Users user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
+    public UserDTO addUsers(AddUserDTO addUserDTO) {
+        Users user  = modelMapper.map(addUserDTO , Users.class);
+        user.setPassword(passwordEncoder.encode(addUserDTO.getPassword()));
+        Users savedUser = userRepo.save(user);
+        return modelMapper.map(savedUser, UserDTO.class);
     }
 
     public List<UserDTO> findByRoles(String role) {

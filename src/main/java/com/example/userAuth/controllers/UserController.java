@@ -1,5 +1,6 @@
 package com.example.userAuth.controllers;
 
+import com.example.userAuth.dto.AddUserDTO;
 import com.example.userAuth.dto.UserDTO;
 import com.example.userAuth.model.Users;
 import com.example.userAuth.service.UserServices;
@@ -16,7 +17,7 @@ public class UserController {
    @Autowired
     private UserServices userServ;
     @PostMapping("/add")
-    public ResponseEntity<Users> addUsersToDB(@RequestBody Users user){return ResponseEntity.ok().body(userServ.addUsers(user));}
+    public ResponseEntity<UserDTO> addUsersToDB(@RequestBody AddUserDTO addUserDTO){return ResponseEntity.ok().body(userServ.addUsers(addUserDTO));}
     @GetMapping("/get-by-roles")
     public  ResponseEntity<List<UserDTO>> getUsersByRoles(@RequestParam("role") String role){return ResponseEntity.ok().body(userServ.findByRoles(role));}
     @GetMapping("/getAll")
